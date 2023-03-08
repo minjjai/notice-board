@@ -16,8 +16,8 @@ class PostController {
 
   createPost = async (req, res, next) => {
     try {
-      // const { user } = res.locals.user;
-      const { user, title, content } = req.body;
+      const { user } = res.locals.user;
+      const { title, content } = req.body;
       const createdPost = await this.postService.createPost({
         user,
         title,
