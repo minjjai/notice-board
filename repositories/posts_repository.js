@@ -1,6 +1,6 @@
 const { Posts } = require("../models");
-const { Comments } = require("../models");
-// const { Likes } = require("../models"); //포스트 테이블에 라이크까지 조인해보자..
+// const { Comments } = require("../models");
+const { Likes } = require("../models"); 
 
 class PostRepository {
   getAllPosts = async () => {
@@ -41,12 +41,12 @@ class PostRepository {
 
   updatePost = async (postId, title, content) => {
     try {
-    const updatePostData = await Posts.update(
-      { title, content },
-      { where: { postId } }
-    );
+      const updatePostData = await Posts.update(
+        { title, content },
+        { where: { postId } }
+      );
 
-    return updatePostData;
+      return updatePostData;
     } catch (err) {
       throw err;
     }
@@ -54,13 +54,61 @@ class PostRepository {
 
   deletePost = async (postId) => {
     try {
-    await Posts.destroy({ where: { postId } });
+      await Posts.destroy({ where: { postId } });
 
-    return "게시글이 삭제되었습니다.";
+      return "게시글이 삭제되었습니다.";
     } catch(err) {
       throw err;
     }
   };
+
+  // createLike = async (postId, user) => {
+  //   try {
+  //     const createLike = await Likes.create({ user: user, like: postId });
+  //     return createLike
+  //   } catch(err){
+  //     console.log("라이크 디비 생성문제")
+  //     throw err;
+  //   }
+  // };
+
+  // countLike = async (postId) => {
+  //   try {
+    //   const countLike = await Posts.increment(
+    //     { likeSum: 1 },
+    //     { where: { postId: postId } }
+    //   );
+    //   return countLike;
+  //   } catch(err) {
+  //     console.log("포스 디비 좋아요수 증가문제")
+  //     throw err;
+  //   }
+  // };
+
+  // deleteLike = async (postId, user) => {
+  //   try {
+    //   const deleteLike = await Likes.destroy({
+    //     where: { user: user, like: postId },
+    //   });
+    //   return deleteLike;
+  // } catch(err) {
+  //   console.log("라이크 디비 삭제문제")
+  //   throw err;
+  // }
+  // };
+  // discountLike = async (postId) => {
+  //   try{
+    //   const discountLike = await Posts.decrement(
+    //     { likeSum: 1 },
+    //     { where: { postId: postId } }
+    //   );
+    //   return discountLike;
+  //   } catch (err){
+  //     console.log("포스 디비 좋아요수 감소문제")
+  //     throw err;
+  //   }
+  // };
+  
 
 }
 

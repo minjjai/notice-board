@@ -3,7 +3,7 @@ const PostService = require("../services/posts_service");
 class PostController {
   postService = new PostService();
 
-  getAllPosts = async (req, res, next) => {
+  getAllPosts = async (req, res, next) => { //어스미들웨어를 여기서 리콰이어 하면 좋아요한 여부 확인 가능? 좋아요한 postId는 true로..
     try {
       const posts = await this.postService.getAllPosts();
 
@@ -30,6 +30,7 @@ class PostController {
     }
   }
 
+  //댓글까지 보이게 수정해야함
   getPostById = async (req, res, next) => {
     try {
       const { postId } = req.params;
@@ -43,19 +44,19 @@ class PostController {
 
   updatePost = async (req, res, next) => {
     try{
-    const { postId } = req.params;
-    console.log({postId});
-    const { title, content } = req.body;
-    const user = res.locals.user.user;
+      const { postId } = req.params;
+      console.log({postId});
+      const { title, content } = req.body;
+      const user = res.locals.user.user;
 
-    const updatePost = await this.postService.updatePost(
-      postId,
-      user,
-      title,
-      content
-    );
+      const updatePost = await this.postService.updatePost(
+        postId,
+        user,
+        title,
+        content
+      );
 
-    res.json({ data: updatePost });
+      res.json({ data: updatePost });
     } catch (err){
       console.log(err);
       res.json({ data: false})
@@ -64,18 +65,32 @@ class PostController {
 
   deletePost = async (req, res, next) => {
     try{
-    const { postId } = req.params;
-    const user = res.locals.user.user;
+      const { postId } = req.params;
+      const user = res.locals.user.user;
 
-    const deletePost = await this.postService.deletePost(postId, user);
+      const deletePost = await this.postService.deletePost(postId, user);
 
-    res.json({ data: deletePost });
+      res.json({ data: deletePost });
     } catch(err) {
       console.log(err);
       res.json({data : false})
     }
   };
 
+  // 사용자가 좋아요를 누르기 전에 좋아요를 한 여부를 알아야할까 눌렀을때 이미눌렀다고 알려야할까...
+  // likePost = async (req, res, next) => {
+  //   try {
+    //   const { postId } = req.params;
+    //   const { like } = req.body;
+    //   const user = res.locals.user.usre;
+
+    //   const likePost = await this.postService.likePost(postId, like, user);
+    //   res.json({ data: "success" });
+  //   } catch (err){
+  //     console.log(err);
+  //     res.json({ data: false })
+  //   }
+  // };
 
 }
 
