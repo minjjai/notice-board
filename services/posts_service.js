@@ -29,6 +29,17 @@ class PostService {
       throw err;
     }
   };
+
+  getPostById = async ( postId ) => {
+    try {
+      const createdPost = await this.postRepository.getPostById( postId );
+
+      return createdPost;
+    } catch (err) {
+      throw err;
+    }
+  };
+
 }
 
 module.exports = PostService;
