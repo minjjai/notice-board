@@ -7,5 +7,7 @@ const postController = new PostController();
 router.get("/", postController.getAllPosts);
 router.post("/post", authMiddleware, postController.createPost);
 router.get("/:postId", postController.getPostById);
+router.put("/:postId", authMiddleware, postController.updatePost);
+router.delete("/:postId", authMiddleware, postController.deletePost);
 
 module.exports = router;

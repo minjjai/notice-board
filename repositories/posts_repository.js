@@ -39,6 +39,29 @@ class PostRepository {
     }
   };
 
+  updatePost = async (postId, title, content) => {
+    try {
+    const updatePostData = await Posts.update(
+      { title, content },
+      { where: { postId } }
+    );
+
+    return updatePostData;
+    } catch (err) {
+      throw err;
+    }
+  };
+
+  deletePost = async (postId) => {
+    try {
+    await Posts.destroy({ where: { postId } });
+
+    return "게시글이 삭제되었습니다.";
+    } catch(err) {
+      throw err;
+    }
+  };
+
 }
 
 module.exports = PostRepository;
