@@ -12,4 +12,22 @@ class PostRepository {
       throw err;
     }
   };
+
+  createPost = async ({ user, title, content }) => {
+    try {
+      console.log({ user, title, content })
+      const createdPost = await Posts.create({
+        user,
+        title,
+        content,
+        likeSum: 0,
+      });
+
+      return createdPost;
+    } catch (error) {
+      throw error;
+    }
+  };
 }
+
+module.exports = PostRepository;
