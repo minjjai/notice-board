@@ -18,7 +18,6 @@ class PostController {
     try {
       // const { user } = res.locals.user;
       const { user, title, content } = req.body;
-      console.log(req.body)
       const createdPost = await this.postService.createPost({
         user,
         title,
@@ -31,6 +30,16 @@ class PostController {
     }
   }
 
+  getPostById = async (req, res, next) => {
+    try {
+      const { postId } = req.params;
+      const post = await this.postService.getPostById( postId );
+      res.json({ data: post });
+    } catch (err) {
+      console.log(err);
+      res.json({ data: false})
+    }
+  }
 
 }
 

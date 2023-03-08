@@ -24,10 +24,21 @@ class PostRepository {
       });
 
       return createdPost;
-    } catch (error) {
-      throw error;
+    } catch (err) {
+      throw err;
     }
   };
+
+  getPostById = async (postId) => {
+    try {
+      const post = await Posts.findByPk(postId);
+
+      return post;
+    } catch (err) {
+      throw err;
+    }
+  };
+
 }
 
 module.exports = PostRepository;
