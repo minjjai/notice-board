@@ -41,6 +41,42 @@ class PostController {
     }
   }
 
+  updatePost = async (req, res, next) => {
+    try{
+    const { postId } = req.params;
+    console.log({postId});
+    const { title, content } = req.body;
+    const user = res.locals.user.user;
+
+    const updatePost = await this.postService.updatePost(
+      postId,
+      user,
+      title,
+      content
+    );
+
+    res.json({ data: updatePost });
+    } catch (err){
+      console.log(err);
+      res.json({ data: false})
+    }
+  };
+
+  deletePost = async (req, res, next) => {
+    try{
+    const { postId } = req.params;
+    const user = res.locals.user.user;
+
+    const deletePost = await this.postService.deletePost(postId, user);
+
+    res.json({ data: deletePost });
+    } catch(err) {
+      console.log(err);
+      res.json({data : false})
+    }
+  };
+
+
 }
 
 module.exports = PostController;
