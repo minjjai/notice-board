@@ -9,7 +9,7 @@
 <p float="left">
 <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
 <img src="https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=CSS&logoColor=white">
-<img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=javascript&logoColor=ffdd54">
+<img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=Node.js&logoColor=white"/>
 </p>
 
 <h4>-프레임워크 / 플랫폼 / 라이브러리</h4>
@@ -21,7 +21,7 @@
 </p>
 
 <h4>-데이터베이스</h4>
-<img src="https://img.shields.io/badge/MySQL-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white">
+<img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=MySQL&logoColor=white"/>
 
 
 <br>
