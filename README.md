@@ -1,4 +1,4 @@
-# notice-board
+
 <h3><b>민재 게시판</b></h3>
 간단한 crud만 구현한 익명 게시판
 <br><br>
