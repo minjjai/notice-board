@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      // Comments.belongsTo(models.Posts, {
+      //   foreignKey: 'postId',
+      //   sourceKey: 'postId',
+      // })
     }
   }
   Comments.init({
@@ -18,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
-    postId: DataTypes.STRING,
+    postId: DataTypes.INTEGER,
     user: DataTypes.STRING,
     content: DataTypes.STRING
   }, {

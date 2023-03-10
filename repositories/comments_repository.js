@@ -22,11 +22,20 @@ class CommentRepository {
     }
   };
 
-  createComment = async ({postId, user, content}) => {
+  getCommentsByPostId = async ({postId}) => {
+    try{
+        const comments = await Comments.findAll({ where: { postId } });
+
+        return comments;
+    } catch(err){ 
+        throw err;
+    }
+  };
+
+  createComment = async ({postId, content}) => {
     try{
         const createdCommentData = await Comments.create({
-        postId,
-        user,
+        postId, 
         content
         });
 

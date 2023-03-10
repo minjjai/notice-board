@@ -7,11 +7,8 @@ class CommentController {
         try{
             const {content} = req.body;
             const { postId } = req.params;
-            const { user } = res.locals.user;
-            console.log({content, postId, user})
-
             const createdComment = await this.commentService.createComment({
-                postId, user, content
+                postId, content
             });
             res.json({ data: createdComment })
         } catch(err){
@@ -24,12 +21,9 @@ class CommentController {
         try {
             const { commentId } = req.params;
             const { content } = req.body;
-            const { user } = res.locals.user;
-            console.log({commentId}, 8888)
         
             const updateComment = await this.commentService.updateComment({
             commentId,
-            user,
             content
         });
         
@@ -43,11 +37,9 @@ class CommentController {
       deleteComment = async (req, res, next) => {
         try{
             const { commentId } = req.params;
-            const { user } = res.locals.user;
         
             const deletePost = await this.commentService.deleteComment({
             commentId,
-            user
             });
         
             res.status(200).json({ data: deletePost });

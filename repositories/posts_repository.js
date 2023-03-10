@@ -1,23 +1,35 @@
 const { Posts } = require("../models");
-// const { Comments } = require("../models");
+const { Comments } = require("../models");
 const { Likes } = require("../models"); 
 
 class PostRepository {
   getAllPosts = async () => {
     try {
       const posts = await Posts.findAll();
-
       return posts;
     } catch (err) {
       throw err;
     }
   };
 
-  createPost = async ({ user, title, content }) => {
+  // getAllPostsCheckedLikes = async (userId) => {
+  //   try{
+  //     const posts = await Posts.findAll({
+  //       include: [{
+  //         model: Likes,
+  //         where: {
+  //           userId: userId,
+  //         }
+  //       }]
+  //     });
+  //   } catch (err) {
+  //     throw err;
+  //   }
+  // }
+
+  createPost = async ({ title, content }) => {
     try {
-      console.log({ user, title, content })
       const createdPost = await Posts.create({
-        user,
         title,
         content,
         likeSum: 0,
@@ -25,12 +37,13 @@ class PostRepository {
 
       return createdPost;
     } catch (err) {
-      throw err;
+      throw err;s
     }
   };
 
-  getPostById = async (postId) => {
+  getPostById = async ({postId}) => {
     try {
+      console.log(postId)
       const post = await Posts.findByPk(postId);
 
       return post;
@@ -96,6 +109,7 @@ class PostRepository {
   //   throw err;
   // }
   // };
+
   // discountLike = async (postId) => {
   //   try{
     //   const discountLike = await Posts.decrement(

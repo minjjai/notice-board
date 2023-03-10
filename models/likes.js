@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Likes.belongsTo(models.Users, {
+        foreignKey: 'userId',
+        sourceKey: 'userId',
+      })
     }
   }
   Likes.init({
@@ -18,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
-    user: DataTypes.STRING,
+    userId: DataTypes.INTEGER,
     like: DataTypes.BOOLEAN
   }, {
     sequelize,

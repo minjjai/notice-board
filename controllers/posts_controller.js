@@ -3,11 +3,19 @@ const PostService = require("../services/posts_service");
 class PostController {
   postService = new PostService();
 
-  getAllPosts = async (req, res, next) => { //어스미들웨어를 여기서 리콰이어 하면 좋아요한 여부 확인 가능? 좋아요한 postId는 true로..
+  getAllPosts = async (req, res, next) => { 
     try {
-      const posts = await this.postService.getAllPosts();
+      //   const { authorization } = req.headers;
+      //   const [authType, authToken] = (authorization || "").split(" "); 
+      //  if (!authToken || authType !== "Bearer") {
+        const posts = await this.postService.getAllPosts();
+        res.json({ data: posts });
+        // } else{
 
-      res.status(200).json({ data: posts });
+        // const { userId } = jwt.verify(authToken, "my-secret-key");
+        // const posts = await this.postService.getAllPostsCheckedLikes(userId);
+        // res.status(200).json({ data: posts });
+        // }
     } catch (err) {
       console.log(err);
       res.json({ data: false });
@@ -16,10 +24,8 @@ class PostController {
 
   createPost = async (req, res, next) => {
     try {
-      const { user } = res.locals.user;
       const { title, content } = req.body;
       const createdPost = await this.postService.createPost({
-        user,
         title,
         content,
       });
@@ -34,7 +40,7 @@ class PostController {
   getPostById = async (req, res, next) => {
     try {
       const { postId } = req.params;
-      const post = await this.postService.getPostById( postId );
+      const post = await this.postService.getPostById({postId });
       res.json({ data: post });
     } catch (err) {
       console.log(err);
@@ -47,11 +53,9 @@ class PostController {
       const { postId } = req.params;
       console.log({postId});
       const { title, content } = req.body;
-      const user = res.locals.user.user;
 
       const updatePost = await this.postService.updatePost(
         postId,
-        user,
         title,
         content
       );
@@ -66,9 +70,8 @@ class PostController {
   deletePost = async (req, res, next) => {
     try{
       const { postId } = req.params;
-      const user = res.locals.user.user;
 
-      const deletePost = await this.postService.deletePost(postId, user);
+      const deletePost = await this.postService.deletePost(postId);
 
       res.json({ data: deletePost });
     } catch(err) {
